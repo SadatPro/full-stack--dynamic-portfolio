@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nothing OS Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;600;700&family=Noto+Sans+Bengali:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+      /* --- START BASE STYLES --- */
+      :root {
+        /* Dark Theme Variables (Dynamic & Colorful) */
+        --bg-body-dark: #050505;
+        --bg-card-dark: rgba(20, 20, 30, 0.4);
+        --border-dark: rgba(255, 255, 255, 0.1);
+        --text-primary-dark: #FFFFFF;
+        --text-secondary-dark: #A1A1AA;
+        
+        /* Light Theme Variables */
+        --bg-body-light: #F0F4F8;
+        --bg-card-light: rgba(255, 255, 255, 0.6);
+        --border-light: rgba(0, 0, 0, 0.05);
+        --text-primary-light: #18181B;
+        --text-secondary-light: #52525B;
+
+        /* Dynamic Accents */
+        --accent-gradient: linear-gradient(135deg, #00C6FF, #0072FF);
+        --accent-gradient-text: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+        --accent-primary: #00C6FF;
+      }
+
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: var(--bg-body-dark);
+        color: var(--text-primary-dark);
+        transition: background-color 0.3s ease, color 0.3s ease;
+        background-image: 
+          radial-gradient(circle at 15% 50%, rgba(76, 29, 149, 0.15), transparent 25%), 
+          radial-gradient(circle at 85% 30%, rgba(56, 189, 248, 0.15), transparent 25%);
+        background-attachment: fixed;
+      }
+      
+      .font-plex-mono {
+        font-family: 'IBM Plex Mono', monospace;
+      }
+      .font-bengali {
+        font-family: 'Noto Sans Bengali', sans-serif;
+      }
+      @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+      .animate-fade-in { animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+      /* --- END BASE STYLES --- */
+
+      /* --- START THEME IMPLEMENTATION --- */
+      
+      /* Card Styles - Glassmorphic */
+      .card-bg {
+          background-color: var(--bg-card-dark);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          border: 1px solid var(--border-dark);
+          border-radius: 16px;
+          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .list-item-bg {
+          background-color: rgba(255, 255, 255, 0.03);
+          border-bottom: 1px solid var(--border-dark);
+          backdrop-filter: blur(5px);
+      }
+      .list-item-bg:last-child {
+        border-bottom: none;
+      }
+
+      .modal-bg {
+          background-color: rgba(15, 15, 20, 0.9);
+          border: 1px solid var(--border-dark);
+          backdrop-filter: blur(20px);
+          box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      }
+
+      /* Text Colors */
+      .text-white { color: var(--text-primary-dark); }
+      .text-black { color: #000000; }
+      .text-gray-300 { color: var(--text-secondary-dark); }
+      .text-gray-400 { color: #9CA3AF; }
+      .text-gray-500 { color: #6B7280; }
+      .text-gray-600 { color: #4B5563; }
+      
+      .border-gray-800, .border-gray-700 { border-color: var(--border-dark); }
+      .divide-gray-800 > :not([hidden]) ~ :not([hidden]) { border-color: var(--border-dark); }
+      
+      /* Inputs */
+      input, select, textarea {
+          background-color: rgba(0, 0, 0, 0.2);
+          border: 1px solid var(--border-dark);
+          color: var(--text-primary-dark);
+          border-radius: 8px;
+          transition: all 0.2s;
+      }
+      input::placeholder, textarea::placeholder { color: #6B7280; }
+      input:focus, select:focus, textarea:focus {
+        border-color: var(--accent-primary);
+        box-shadow: 0 0 0 2px rgba(0, 198, 255, 0.2);
+        outline: none;
+        background-color: rgba(0, 0, 0, 0.3);
+      }
+
+      /* Hover States */
+      .hover\:bg-gray-800:hover { background-color: rgba(255, 255, 255, 0.05); }
+      .hover\:bg-gray-700:hover { background-color: rgba(255, 255, 255, 0.1); }
+      
+      /* Accents */
+      .text-gradient-cyan { 
+        color: transparent;
+        background: var(--accent-gradient-text);
+        -webkit-background-clip: text;
+        background-clip: text;
+        font-weight: 700;
+      }
+      .bg-red-500 { background-color: #ef4444; }
+
+      .active-nav-link { 
+        background: rgba(255, 255, 255, 0.08); 
+        color: var(--text-primary-dark); 
+        border-right: 3px solid var(--accent-primary); 
+      }
+
+      /* Buttons */
+      .action-btn { 
+        background: var(--accent-gradient); 
+        color: #FFFFFF; 
+        font-weight: 600; 
+        border-radius: 8px; 
+        transition: transform 0.2s, opacity 0.2s;
+        border: none;
+      }
+      .action-btn:hover { 
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 198, 255, 0.3);
+      }
+      .action-btn:active { transform: translateY(0); }
+
+      .secondary-btn { 
+        background-color: transparent; 
+        border: 1px solid rgba(255, 255, 255, 0.2); 
+        color: var(--text-primary-dark); 
+        font-weight: 600; 
+        border-radius: 8px;
+      }
+      .secondary-btn:hover { 
+        background-color: rgba(255, 255, 255, 0.05); 
+        border-color: var(--text-primary-dark);
+      }
+      
+      /* Light Theme Overrides */
+      body.light-theme {
+        background-color: var(--bg-body-light);
+        color: var(--text-primary-light);
+        background-image: 
+          radial-gradient(circle at 0% 0%, rgba(200, 200, 255, 0.4), transparent 30%), 
+          radial-gradient(circle at 100% 100%, rgba(200, 255, 255, 0.4), transparent 30%);
+      }
+      .light-theme .card-bg {
+          background-color: var(--bg-card-light);
+          border-color: var(--border-light);
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      }
+      .light-theme .list-item-bg {
+          border-color: var(--border-light);
+          background-color: rgba(255, 255, 255, 0.4);
+      }
+      .light-theme .modal-bg {
+          background-color: rgba(255, 255, 255, 0.95);
+          border-color: var(--border-light);
+      }
+      .light-theme .text-white { color: var(--text-primary-light); }
+      .light-theme .text-gray-300 { color: var(--text-secondary-light); }
+      .light-theme .text-gray-400 { color: #64748B; }
+      
+      .light-theme input, .light-theme select, .light-theme textarea {
+          background-color: rgba(255, 255, 255, 0.7);
+          border-color: var(--border-light);
+          color: var(--text-primary-light);
+      }
+      .light-theme input:focus { 
+        border-color: var(--accent-primary);
+        background-color: #FFFFFF; 
+      }
+      
+      .light-theme .hover\:bg-gray-800:hover { background-color: rgba(0, 0, 0, 0.05); }
+      .light-theme .hover\:bg-gray-700:hover { background-color: rgba(0, 0, 0, 0.08); }
+
+      .light-theme .active-nav-link { 
+        background-color: rgba(0, 0, 0, 0.05) !important; 
+        color: var(--text-primary-light) !important; 
+        border-right-color: var(--accent-primary); 
+      }
+      .light-theme .secondary-btn { border-color: rgba(0, 0, 0, 0.2); color: var(--text-primary-light); }
+      .light-theme .secondary-btn:hover { background-color: rgba(0, 0, 0, 0.05); border-color: #000; }
+
+      .skill-tag {
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--text-primary-dark);
+        padding: 4px 12px;
+        border-radius: 6px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        display: inline-block;
+        transition: all 0.2s;
+        border: 1px solid var(--border-dark);
+        backdrop-filter: blur(4px);
+      }
+      .skill-tag:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-1px);
+        border-color: var(--accent-primary);
+      }
+      .light-theme .skill-tag {
+        background-color: rgba(0, 0, 0, 0.05);
+        color: var(--text-primary-light);
+        border-color: var(--border-light);
+      }
+      .light-theme .skill-tag:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+
+      /* --- START HEADER BUTTON STYLES --- */
+      .header-btn {
+        background-color: transparent;
+        color: var(--text-primary-dark);
+        transition: all 0.2s;
+      }
+      .header-btn:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: var(--accent-primary);
+      }
+
+      .light-theme .header-btn {
+        color: var(--text-primary-light);
+      }
+      .light-theme .header-btn:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+      /* --- END HEADER BUTTON STYLES --- */
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+        background-color: transparent;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+      }
+      .light-theme ::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.2);
+      }
+
+      /* --- START MODERN FEATURES --- */
+      .scroll-animate {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .scroll-animate.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .k-bar-backdrop {
+        background-color: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(8px);
+      }
+      
+      .feed-container {
+        max-width: 740px;
+        margin: 0 auto;
+      }
+
+      /* Gradient Text Utility */
+      .text-gradient {
+        background: var(--accent-gradient-text);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      
+      /* Image Hover Zoom */
+      .img-zoom {
+        transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      }
+      .card-bg:hover .img-zoom {
+        transform: scale(1.05);
+      }
+      /* --- END MODERN FEATURES --- */
+    </style>
+
+</head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <script type="module" src="./index-debug.tsx"></script>
+  </body>
+</html>
